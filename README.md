@@ -28,6 +28,22 @@ src/
 └── lib/        # 유틸리티 함수 및 설정
 ```
 
+## Serverless 프로젝트 생성 및 연동
+
+1. Supabase 프로젝트 생성
+2. env.example 파일 기반으로 .env.local 파일 생성 및 supabase key 붙여넣기
+3. Supabase > Authentication > Sign In / Providers > Google 설정
+4. Google cloud 프로젝트 생성
+5. Google cloud OAuth 클라이언트 ID 만들기
+
+- 승인된 JavaScript 원본: 생성한 supabase 주소(Supabase settings > Data API > Project URL) (e.g. https://abc.supabase.co)
+- 승인된 리디렉션 URI: supabase google provider에서 제공한 callback URL (e.g. https://abc.supabase.co/auth/v1/callback)
+- 생성시 나온 클라이언트ID, secret (e.g. abc.apps.googleusercontent.com)을 Supabase 의 google provider의 Cliend Ids에 붙여넣기
+
+6. Vercel 프로젝트 생성 및 연동
+
+- vercel 설정에 environment variables 추가
+
 ## 시작하기
 
 1. 환경 설정
