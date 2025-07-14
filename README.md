@@ -70,3 +70,49 @@ npm run dev
 - `npm run build`: 프로덕션 빌드
 - `npm run start`: 프로덕션 서버 실행
 - `npm run lint`: ESLint를 통한 코드 검사
+
+# Vercel 환경 변수 설정 가이드
+
+## 1. Vercel 대시보드에서 환경 변수 설정
+
+Vercel 프로젝트 설정에서 다음 환경 변수를 추가하세요:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://kcvzukpsrulvenfxzjph.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtjdnp1a3BzcnVsdmVuZnh6anBoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAxNjQ1NzAsImV4cCI6MjA2NTc0MDU3MH0.oMbsSTqIQh2mIwHOVT7L4wXhujvUtgnzB6pzsdD0aJ4
+NEXT_PUBLIC_APP_URL=https://donedrop.vercel.app
+```
+
+## 2. Supabase 설정에서 허용된 리다이렉트 URL 추가
+
+Supabase 대시보드 → Authentication → URL Configuration에서 다음 URL들을 추가하세요:
+
+### Site URL:
+
+- `https://donedrop.vercel.app`
+
+### Redirect URLs:
+
+- `https://donedrop.vercel.app/auth/callback`
+- `http://localhost:3000/auth/callback` (개발용)
+
+## 3. GitHub OAuth 앱 설정
+
+GitHub Developer Settings에서 OAuth 앱의 Authorization callback URL을 다음과 같이 설정하세요:
+
+### Authorization callback URL:
+
+- `https://kcvzukpsrulvenfxzjph.supabase.co/auth/v1/callback`
+
+## 4. 배포 후 테스트
+
+1. https://donedrop.vercel.app에서 GitHub 로그인 테스트
+2. 로그인 후 https://donedrop.vercel.app/app으로 올바르게 리다이렉트되는지 확인
+
+## 문제 해결
+
+만약 여전히 localhost로 리다이렉트된다면:
+
+1. Vercel 환경 변수가 올바르게 설정되었는지 확인
+2. 다시 배포하여 환경 변수 변경사항 반영
+3. 브라우저 캐시 클리어
